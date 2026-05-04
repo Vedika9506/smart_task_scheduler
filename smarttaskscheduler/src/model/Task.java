@@ -1,37 +1,29 @@
 package model;
 
-public class Task implements Comparable<Task> {
-    private int taskId;
-    private String taskName;
+public class Task {
+    private int id;
+    private String name;
     private int priority;
 
-    public Task(int taskId, String taskName, int priority) {
-        this.taskId = taskId;
-        this.taskName = taskName;
+    // Constructor
+    public Task(int id, String name, int priority) {
+        this.id = id;
+        this.name = name;
         this.priority = priority;
     }
 
-    public void execute() throws Exception {
-        System.out.println(Thread.currentThread().getName() +
-                " executing Task: " + taskName + " (Priority: " + priority + ")");
+    // Getters
+    public int getId() { return id; }
+    public String getName() { return name; }
+    public int getPriority() { return priority; }
 
-        // Simulate work
-        Thread.sleep(1000);
-
-        // Random failure simulation
-        if (Math.random() < 0.2) {
-            throw new Exception("Task Failed: " + taskName);
-        }
-
-        System.out.println("Completed Task: " + taskName);
-    }
-
-    public int getPriority() {
-        return priority;
-    }
+    // Setters
+    public void setId(int id) { this.id = id; }
+    public void setName(String name) { this.name = name; }
+    public void setPriority(int priority) { this.priority = priority; }
 
     @Override
-    public int compareTo(Task other) {
-        return Integer.compare(other.priority, this.priority); // High priority first
+    public String toString() {
+        return id + ", " + name + ", " + priority;
     }
 }

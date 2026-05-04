@@ -1,18 +1,26 @@
 package service;
 
 import model.Task;
-import java.util.concurrent.PriorityBlockingQueue;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TaskScheduler {
 
-    private PriorityBlockingQueue<Task> taskQueue = new PriorityBlockingQueue<>();
+    private List<Task> tasks = new ArrayList<>();
 
-    public void addTask(Task task) {
-        System.out.println("Task Added: " + task);
-        taskQueue.put(task);
+    public void addTask(int id, String name, int priority) {
+
+        // ✅ CORRECT WAY (use constructor)
+        Task task = new Task(id, name, priority);
+
+        tasks.add(task);
+
+        System.out.println("Task added successfully!");
     }
 
-    public Task getTask() throws InterruptedException {
-        return taskQueue.take();
+    public void showTasks() {
+        for (Task t : tasks) {
+            System.out.println(t);
+        }
     }
 }
