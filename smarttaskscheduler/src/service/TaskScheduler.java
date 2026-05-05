@@ -1,26 +1,23 @@
 package service;
 
 import model.Task;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class TaskScheduler {
 
-    private List<Task> tasks = new ArrayList<>();
+    private Queue<Task> taskQueue = new LinkedList<>();
 
-    public void addTask(int id, String name, int priority) {
-
-        // ✅ CORRECT WAY (use constructor)
-        Task task = new Task(id, name, priority);
-
-        tasks.add(task);
-
-        System.out.println("Task added successfully!");
+    public synchronized void addTask(Task task) {
+        taskQueue.add(task);
+        System.out.println("Task added: " + task);
+        notify();
     }
 
-    public void showTasks() {
-        for (Task t : tasks) {
-            System.out.println(t);
+    public synchronized Task getTask() throws InterruptedException {
+        while (taskQueue.isEmpty()) {
+            wait();
         }
+        return taskQueue.poll();
     }
 }
