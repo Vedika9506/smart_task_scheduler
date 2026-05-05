@@ -17,14 +17,25 @@ public class Task implements Comparable<Task> {
         System.out.println(Thread.currentThread().getName() +
                 " executing task: " + name + " (Priority: " + priority + ")");
 
-        // simulate random failure
         if (Math.random() < 0.2) {
             throw new TaskException("Failed task: " + name);
         }
     }
 
+    public int getTaskId() {
+        return taskId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
     @Override
     public int compareTo(Task o) {
-        return Integer.compare(o.priority, this.priority); // high first
+        return Integer.compare(o.priority, this.priority);
     }
 }
