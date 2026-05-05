@@ -18,6 +18,7 @@ public class Worker implements Runnable {
                 Task task = scheduler.getTask();
 
                 int retries = 2;
+
                 while (retries >= 0) {
                     try {
                         task.execute();
